@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctors List</title>
+  </head>
+  <body>
+    <h2>Welcome {{ user.first_name}}!</h2>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout'%}"> <button>Log out</button> </a>
+    {% else %}
+    <a href="{% url 'register'%}"> <button>Register</button> </a>
+    <a href="{% url 'login'%}"> <button>Log in</button> </a>
+    {% endif %}
+    <a href="{% url 'doctor_form' %}"> <button>➕ Add New Doctor</button> </a>
+    <h1>Doctors List</h1>
+    {% for doctor in doctors %}
+    <h2>{{ doctor.name }}</h2>
+    <p>{{ doctor.speciality }}</p>
+    <a href="{% url 'doctor_detail' doctor.pk %}">
+      <button>See More</button>
+    </a>
+    {% endfor %}
+  </body>
+</html>

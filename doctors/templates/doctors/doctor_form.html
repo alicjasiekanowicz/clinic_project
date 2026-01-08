@@ -1,0 +1,11 @@
+<html lang="en">
+  <head> </head>
+  <body>
+    <a href="{% url 'doctors_list' %}"> <button>Go Back</button> </a>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+
+      <button type="submit">💾 Save Book</button>
+    </form>
+  </body>
+</html>

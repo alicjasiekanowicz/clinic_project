@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <a href="{% url 'doctors_list' %}"> <button>Go Back</button> </a>
+    <h1>Doctor Detail</h1>
+    <h2>{{ doctor.field_name }}</h2>
+    <p>{{ doctor.speciality }}</p>
+    <p>{{ doctor.years_of_experience }}</p>
+    <p>{{ doctor.bio}}</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'doctor_modify' doctor.pk %}"> <button>Modify</button> </a>
+    <a href="{% url 'doctor_confirmation' doctor.pk %}">
+      <button>Delete</button>
+    </a>
+    {% endif %}
+  </body>
+</html>
