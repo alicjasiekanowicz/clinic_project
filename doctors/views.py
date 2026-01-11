@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 def doctors_list(request):
     doctors = Doctor.objects.all()
     return render(request,"doctors/doctors_list.html",{ "doctors": doctors })
+
 @login_required
 def doctor_form(request):
     if request.method == "POST":
