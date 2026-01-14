@@ -1,11 +1,30 @@
 from .models import Doctor
 from django import forms
+from django.contrib.auth.models import User
+from accounts.forms  import RegisterForm
 
 class DoctorForm(forms.ModelForm):
 
     class Meta:
         model = Doctor
-        fields = "__all__"
+        fields = [
+        'name',
+        #'license_number',
+        'speciality',
+        #'phone_number',
+        'years_of_experience',
+        'bio'
+        #'consultation_fee',
+        #'is_available'
+]
+
+'''class UserRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = User  
+        fields = ['username', 'first_name', 'last_name', 'email','password1', 'password2']'''
+
+
+
         
 ''' # Customize how fields look in
         widgets = {

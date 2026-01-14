@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'doctors/style.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'doctors_list' %}">Doctors List</a>
+      <a href="">Patients List</a>
+    </nav>
+    {% block content %} {% endblock %}
+  </body>
+</html>

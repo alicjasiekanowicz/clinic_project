@@ -3,7 +3,11 @@
   <body>
     <a href="{% url 'doctors_list' %}"> <button>Go Back</button> </a>
     <form method="post">
-      {% csrf_token %} {{ form.as_p }}
+      {% csrf_token %}
+      <h2>User form</h2>
+      {{user_form.as_p}}
+      <h2>Doctor form</h2>
+      {{ doctor_form.as_p}}
 
       <button type="submit">💾 Save Book</button>
     </form>

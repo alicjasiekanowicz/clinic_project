@@ -11,3 +11,5 @@ class Doctor(models.Model):
    years_of_experience = models.IntegerField()
    speciality = models.CharField(max_length=100)
    bio = models.TextField()
+   def __str__(self):
+      return f"Dr. {self.user.last_name} - {self.speciality}"
