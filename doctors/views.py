@@ -3,6 +3,7 @@ from .models import Doctor
 from .forms import DoctorForm #UserRegistrationForm
 from accounts.forms import RegisterForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -50,6 +51,10 @@ def doctor_delete(request,pk):
         return redirect("doctors_list")
     return render(request,"doctors/doctor_confirmation.html",{"doctor":doctor})
 
-def doctors_dashboard(request, pk):
-    doctor= get_object_or_404(Doctor, pk=pk)
-    return redirect("doctors_dashboard") 
+@login_required
+def doctors_dashboard(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login first.')
+        return redirect('login')
+    doctor_profile = request.user.doctor_profile
+    return render(request,"doctors/doctors_dashboard.html",{"doctor_profile":doctor_profile})

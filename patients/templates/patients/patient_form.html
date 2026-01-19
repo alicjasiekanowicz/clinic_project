@@ -1,0 +1,15 @@
+<html lang="en">
+  <head> </head>
+  <body>
+    <a href="{% url 'patients_list' %}"> <button>Go Back</button> </a>
+    <form method="post">
+      {% csrf_token %}
+      <h2>User form</h2>
+      {{user_form.as_p}}
+      <h2>Patient form</h2>
+      {{ patient_form.as_p}}
+
+      <button type="submit">💾 Save Book</button>
+    </form>
+  </body>
+</html>

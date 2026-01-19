@@ -14,6 +14,9 @@
     <a href="{% url 'login'%}"> <button>Log in</button> </a>
     {% endif %}
     <a href="{% url 'doctor_form' %}"> <button>➕ Add New Doctor</button> </a>
+    <a href="{% url 'patients_list' %}">
+      <button>Go to patients list</button>
+    </a>
     <h1>Doctors List</h1>
     {% for doctor in doctors %}
     <h2>{{ doctor.name }}</h2>

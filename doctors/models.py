@@ -7,6 +7,7 @@ class Doctor(models.Model):
       on_delete=models.CASCADE,
       related_name='doctor_profile'
    )
+   
    name = models.CharField(max_length=100)
    years_of_experience = models.IntegerField()
    speciality = models.CharField(max_length=100)
