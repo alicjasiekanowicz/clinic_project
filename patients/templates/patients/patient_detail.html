@@ -1,0 +1,7 @@
+{% extends "master.html" %} {% block title %} Patient dashboard {% endblock %}
+{% block content %}
+<a href="{% url 'patient_modify' patient.pk %}"> <button>Modify</button> </a>
+<a href="{% url 'patient_confirmation' patient.pk %}">
+  <button>Delete</button>
+</a>
+{% endblock %}
