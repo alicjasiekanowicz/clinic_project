@@ -1,7 +1,19 @@
-{% extends "master.html" %} {% block title %} Patient dashboard {% endblock %}
-{% block content %}
-<a href="{% url 'patient_modify' patient.pk %}"> <button>Modify</button> </a>
-<a href="{% url 'patient_confirmation' patient.pk %}">
-  <button>Delete</button>
-</a>
+{% extends "master.html" %} {% block title %} Patient detail {% endblock %}
+{%block content %}
+<a href="{% url 'patients_list' %}"> <button>Go Back</button> </a>
+<h1>Patient Detail</h1>
+<h2>{{ patient.name }}</h2>
+<p>{{ patient.birthdate }}</p>
+<p>{{ patient.address }}</p>
+<p>{{ patient.phonenumber }}</p>
+<p>{{ patient.medicalhistory}}</p>
+<p>{{ patient.bloodtype}}</p>
+<div>
+  {% if user.is_authenticated %}
+  <a href="{% url 'patient_modify' patient.pk %}"> <button>Modify</button> </a>
+  <a href="{% url 'patient_confirmation' patient.pk %}">
+    <button>Delete</button>
+  </a>
+  {% endif %}
+</div>
 {% endblock %}

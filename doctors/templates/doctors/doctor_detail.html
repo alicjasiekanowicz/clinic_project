@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head> </head>
   <body>
@@ -6,6 +6,7 @@
     <h1>Doctor Detail</h1>
     <h2>{{ doctor.field_name }}</h2>
     <p>{{ doctor.speciality }}</p>
+    <p>{{ doctor.user.email}}</p>
     <p>{{ doctor.years_of_experience }}</p>
     <p>{{ doctor.bio}}</p>
     {% if user.is_authenticated %}

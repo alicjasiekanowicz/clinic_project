@@ -33,13 +33,16 @@ def patient_detail(request,pk):
 def patient_modify(request,pk):
     patient= get_object_or_404(Patient, pk=pk)
     if request.method == "POST":
-        form = PatientForm(request.POST, instance=patient)
-        if form.is_valid():
-            form.save() #saves record to the database
-            return redirect("patients_list")
-    else:
-        form = PatientForm(instance=patient) 
-    return render(request,"patients/patient_form.html",{"form":form})
+        patient_form = PatientForm(request.POST,instance=patient)
+        user_form = RegisterForm(request.POST,instance=request.user)
+        if patient_form.is_valid() and user_form.is_valid() :
+           patient_form.save()
+           user_form.save()
+        return redirect("patients_list")   
+    else: 
+        patient_form = PatientForm(instance=patient)
+        user_form = RegisterForm(instance=request.user)
+    return render(request, "patients/patient_form.html",{'user_form': user_form,'patient_form': patient_form})
 
 @login_required
 def patient_delete(request,pk):
@@ -48,3 +51,6 @@ def patient_delete(request,pk):
         patient.delete()
         return redirect("patients_list")
     return render(request,"patients/patient_confirmation.html",{"patient":patient})
+
+def patient_dashboard(request):
+    pass

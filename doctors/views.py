@@ -36,13 +36,20 @@ def doctor_detail(request,pk):
 def doctor_modify(request,pk):
     doctor= get_object_or_404(Doctor, pk=pk)
     if request.method == "POST":
-        form = DoctorForm(request.POST, instance=doctor)
-        if form.is_valid():
-            form.save() #saves record to the database
-            return redirect("doctors_list")
+        doctor_form = DoctorForm(request.POST)
+        user_form = RegisterForm(request.POST)
+        if doctor_form.is_valid() and user_form.is_valid() :
+            user = user_form.save(commit=False)
+            user.save()
+            doctor_profile = doctor_form.save(commit=False)
+            doctor_profile.user = user
+            doctor_profile.save()
+            return redirect("doctors_dashboard")   
     else:
-        form = DoctorForm(instance=doctor) 
-    return render(request,"doctors/doctor_form.html",{"form":form})
+        doctor_form = DoctorForm(instance=doctor)
+        user_form = RegisterForm(instance=doctor.user) 
+
+    return render(request,"doctors/doctor_form.html",{'user_form': user_form,'doctor_form': doctor_form})
 @login_required
 def doctor_delete(request,pk):
     doctor= get_object_or_404(Doctor, pk=pk)
