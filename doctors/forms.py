@@ -9,13 +9,10 @@ class DoctorForm(forms.ModelForm):
         model = Doctor
         fields = [
         'name',
-        #'license_number',
         'speciality',
-        #'phone_number',
         'years_of_experience',
         'bio'
-        #'consultation_fee',
-        #'is_available'
+
 ]
 
 '''class UserRegistrationForm(forms.ModelForm):

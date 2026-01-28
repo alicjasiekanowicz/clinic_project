@@ -12,3 +12,10 @@ class AppointmentForm(forms.ModelForm):
         'title', 
         'reason',
         ]
+
+        widget=forms.DateInput(
+        attrs={
+        'type': 'date',
+        'class': 'form-control'
+        }
+        )

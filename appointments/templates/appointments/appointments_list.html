@@ -1,6 +1,11 @@
-{% extends "master.html" %} {% block title %} Appointments list {% endblock%} {%
-block content %}<a href="{% url 'appoinment_form'%}">
+{% extends "master.html" %} {% block title %} Appointments list {% endblock%}
+{%block content %}<a href="{% url 'appointment_form'%}">
   <button>Register</button>
 </a>
-<h1>Patients List</h1>
-{% endblock %}
+<h1>Appointments List</h1>
+{% for appointment in appointments %}
+<h1>{{ appointment.title }}</h1>
+<h2>{{ appointment.doctor }}</h2>
+<p>{{ appointment.date }}</p>
+<p>{{ appointment.time}}</p>
+{% endfor %} {% endblock %}
