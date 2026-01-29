@@ -11,9 +11,12 @@ def appointment_form(request):
         appointment_form = AppointmentForm(request.POST)
         if appointment_form.is_valid():
             appointment = appointment_form.save(commit=False)
-            appointment.patient = request.user.patient
-            appointment.save()
-            return redirect("appointments_list")   
+            if not hasattr(request.user, 'patient_profile'):
+                appointment.patient = request.user.patient_profile
+                print(request.user.patient_profile) 
+                appointment.save()
+                return redirect("appointments_list") 
+ 
     else: 
         appointment_form = AppointmentForm()
     return render(request, "appointments/appointment_form.html",{'appointment_form': appointment_form})
