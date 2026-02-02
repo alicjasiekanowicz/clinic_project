@@ -1,5 +1,5 @@
-{% extends "master.html" %} {% block title %} Create an appointment {%endblock%}
-{% block content %}
+{% extends "appointments/master.html" %} {% block title %} Create an appointment
+{%endblock%} {% block content %}
 <a href="{% url 'appointments_list' %}"> <button>Go Back</button> </a>
 <form method="post">
   {% csrf_token %} {{appointment_form.as_p}}

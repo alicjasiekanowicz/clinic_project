@@ -5,5 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
-  <body></body>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
 </html>
