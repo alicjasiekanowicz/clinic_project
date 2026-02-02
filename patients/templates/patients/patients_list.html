@@ -1,5 +1,5 @@
-{% extends "master.html" %} {% block title %} Patient dashboard {% endblock %}
-{% block content %}
+{% extends "patients/master.html" %} {% block title %} Patient dashboard
+{%endblock %} {% block content %}
 <a href="{% url 'patient_form'%}"> <button>Register</button> </a>
 <h1>Patients List</h1>
 {% for patient in patients %}

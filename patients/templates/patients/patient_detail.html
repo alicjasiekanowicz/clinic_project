@@ -1,5 +1,5 @@
-{% extends "master.html" %} {% block title %} Patient detail {% endblock %}
-{%block content %}
+{% extends "patients/master.html" %} {% block title %} Patient detail
+{%endblock%} {%block content %}
 <a href="{% url 'patients_list' %}"> <button>Go Back</button> </a>
 <h1>Patient Detail</h1>
 <h2>{{ patient.name }}</h2>
