@@ -11,7 +11,7 @@ def appointment_form(request):
         appointment_form = AppointmentForm(request.POST)
         if appointment_form.is_valid():
             appointment = appointment_form.save(commit=False)
-            if not hasattr(request.user, 'patient_profile'):
+            if hasattr(request.user, 'patient_profile'):
                 appointment.patient = request.user.patient_profile
                 print(request.user.patient_profile) 
                 appointment.save()
