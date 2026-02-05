@@ -2,6 +2,9 @@
 {%endblock %} {% block content %}
 
 <section>
+  <a href="{% url 'doctors_list' %}">
+    <button>Go back to doctors list</button>
+  </a>
   <a href="{% url 'appointment_form' %}">
     <button>Book an appointment</button>
   </a>
@@ -13,7 +16,13 @@
     <h2>{{ appointment.doctor }}</h2>
     <p>{{ appointment.date }}</p>
     <p>{{ appointment.time}}</p>
-    {% endfor %}
+    <p>{{ appointment.reason}}</p>
+    {% if isPatient %}
+
+    <a href="{% url 'appointment_delete' appointment.pk %}">
+      <button>Delete</button>
+    </a>
+    {% endif %} {% endfor %}
   </div>
 </section>
 {% endblock %}

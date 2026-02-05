@@ -9,7 +9,13 @@ from django.contrib import messages
 # Create your views here.
 def doctors_list(request):
     doctors = Doctor.objects.all()
-    return render(request,"doctors/doctors_list.html",{ "doctors": doctors })
+    isDoctor = False
+    isPatient = False
+    if hasattr(request.user, 'doctor_profile'):
+        isDoctor = True        
+    if hasattr(request.user, 'patient_profile'):
+        isPatient = True
+    return render(request,"doctors/doctors_list.html",{ "doctors": doctors, "isDoctor" : isDoctor, "isPatient" : isPatient })
 
 #@login_required
 def doctor_form(request):

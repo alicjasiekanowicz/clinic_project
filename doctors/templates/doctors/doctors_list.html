@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,10 @@
     <title>Doctors List</title>
   </head>
   <body>
-    <h2>Welcome {{ user.first_name}}!</h2>
+    <h2>
+      Welcome {% if isDoctor%} Dr {%elif isPatient%} Patient {%endif%} {{
+      user.first_name}}!
+    </h2>
     {% if user.is_authenticated %}
     <a href="{% url 'logout'%}"> <button>Log out</button> </a>
     {% else %}
@@ -16,6 +19,9 @@
     <a href="{% url 'doctor_form' %}"> <button>➕ Add New Doctor</button> </a>
     <a href="{% url 'patients_list' %}">
       <button>Go to patients list</button>
+    </a>
+    <a href="{% url 'appointments_list' %}">
+      <button>Go to appointments list</button>
     </a>
     <h1>Doctors List</h1>
     {% for doctor in doctors %}

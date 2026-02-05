@@ -7,7 +7,10 @@ from django.contrib.auth.decorators import login_required
 
 def patients_list(request):
     patients = Patient.objects.all()
-    return render(request,"patients/patients_list.html",{ "patients": patients })
+    isPatient = False
+    if hasattr(request.user, 'patient_profile'):
+        isPatient = True  
+    return render(request,"patients/patients_list.html",{ "patients": patients,"isPatient" : isPatient})
 
 def patient_form(request):
     if request.method == "POST":

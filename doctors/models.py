@@ -13,4 +13,4 @@ class Doctor(models.Model):
    speciality = models.CharField(max_length=100)
    bio = models.TextField()
    def __str__(self):
-      return f"Dr. {self.user.last_name} - {self.speciality}"
+      return f"Dr {self.user.last_name} - {self.speciality}"

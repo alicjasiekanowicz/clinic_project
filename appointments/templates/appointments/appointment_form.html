@@ -1,6 +1,8 @@
 {% extends "appointments/master.html" %} {% block title %} Create an appointment
 {%endblock%} {% block content %}
 <a href="{% url 'appointments_list' %}"> <button>Go Back</button> </a>
+{%if isPatient%} Logged in as patient {%elif isDoctor%} Logged in as doctor
+{%endif%}
 <form method="post">
   {% csrf_token %} {{appointment_form.as_p}}
   <button type="submit">💾 Save Book</button>
