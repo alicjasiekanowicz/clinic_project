@@ -1,2 +1,10 @@
-{% extends "patients/master.html" %} {% block title %} Patient dashboard {%
-endblock %} {%block content %}{{patient_profile.name}} {% endblock %}
+{% extends "patients/master.html" %} {% block title %} Patient dashboard
+{%endblock%} {%block content %}
+<h1>Patient dashboard</h1>
+<h2>{{patient.name}}</h2>
+<p>
+  {% for appointment in appointments %} {{appointment.doctor}}
+  {{appointment.date}} {{appointment.time}} {{appointment.title}}
+  {{appointment.reason}} {{appointment.status}} {%endfor%}
+</p>
+{% endblock %}
