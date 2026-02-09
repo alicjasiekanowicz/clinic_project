@@ -9,7 +9,7 @@
     <button>Book an appointment</button>
   </a>
 
-  <h1>Appointments List</h1>
+  <h1 class="primary-heading">Appointments List</h1>
   {% for appointment in appointments %}
   <div>
     <h3>{{ appointment.title }}</h3>
@@ -18,7 +18,6 @@
     <p>{{ appointment.time}}</p>
     <p>{{ appointment.reason}}</p>
     {% if isPatient %}
-
     <a href="{% url 'appointment_delete' appointment.pk %}">
       <button>Delete</button>
     </a>

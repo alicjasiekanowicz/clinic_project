@@ -15,9 +15,5 @@ body {
 
 h2 {
   margin-bottom: 20px;
-  font-size: 6rem;
-  color: red;
-}
-.primary-heading {
-  color: green;
+  font-size: 3rem;
 }
