@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Appointment
 from .forms import AppointmentForm
+from django.contrib.auth.decorators import login_required
 
 def appointments_list(request):
     appointments = Appointment.objects.all()
@@ -44,3 +45,23 @@ def appointment_delete(request,pk):
         appointment.delete()
         return redirect("appointments_list")
     return render(request,"appointments/appointment_confirmation.html",{"appointment":appointment})
+
+@login_required
+def approve_appointment(request, pk):
+    appointment = get_object_or_404(Appointment, pk=pk)
+    
+    if not hasattr(request.user, "doctor_profile"):
+        print("You should be a doctor to perform this action...")
+        return redirect("appointments_list")
+    
+    if appointment.doctor != request.user.doctor_profile:
+        print("You're not the authorized doctor to perform this action...")
+        return redirect("appointments_list")
+    
+    appointment.status = "approved"
+    appointment.save()
+    return redirect("appointments_list")
+
+@login_required
+def cancel_appointment(request, pk):
+    pass

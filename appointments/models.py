@@ -13,9 +13,10 @@ class Appointment(models.Model):
    reason = models.TextField()
    created_at = models.DateTimeField(auto_now_add=True)
    updated_at = models.DateTimeField(auto_now=True)
+   
    STATUS_CHOICES = [
    ("pending", "Pending"),
-   ("confirmed", "Confirmed"),
+   ("approved", "Approved"),
    ("cancelled", "Cancelled"),
    ("completed", "Completed"),
    ]
