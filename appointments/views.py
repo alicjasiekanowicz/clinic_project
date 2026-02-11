@@ -55,7 +55,7 @@ def approve_appointment(request, pk):
         return redirect("appointments_list")
     
     if appointment.doctor != request.user.doctor_profile:
-        print("You're not the authorized doctor to perform this action...")
+        print(request.user.doctor_profile.speciality, "You're not the authorized doctor to perform this action...")
         return redirect("appointments_list")
     
     appointment.status = "approved"

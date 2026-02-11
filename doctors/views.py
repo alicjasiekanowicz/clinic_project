@@ -42,14 +42,17 @@ def doctor_detail(request,pk):
 def doctor_modify(request,pk):
     doctor= get_object_or_404(Doctor, pk=pk)
     if request.method == "POST":
-        doctor_form = DoctorForm(request.POST)
-        user_form = RegisterForm(request.POST)
+        doctor_form = DoctorForm(request.POST,instance=doctor)
+        user_form = RegisterForm(request.POST,instance=request.user)
         if doctor_form.is_valid() and user_form.is_valid() :
-            user = user_form.save(commit=False)
-            user.save()
+            doctor_form.save()
+            user_form.save()
+            '''user = user_form.save()
             doctor_profile = doctor_form.save(commit=False)
             doctor_profile.user = user
-            doctor_profile.save()
+            doctor_profile.save()'''
+            print(doctor_form.is_valid())
+            print(user_form.is_valid())
             return redirect("doctors_dashboard")   
     else:
         doctor_form = DoctorForm(instance=doctor)
@@ -70,4 +73,5 @@ def doctors_dashboard(request):
         messages.error(request, 'Please login first.')
         return redirect('login')
     doctor_profile = request.user.doctor_profile
+    appointments_doctor = doctor_profile
     return render(request,"doctors/doctors_dashboard.html",{"doctor_profile":doctor_profile})

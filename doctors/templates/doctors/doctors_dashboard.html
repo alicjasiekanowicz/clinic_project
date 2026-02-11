@@ -1,2 +1,26 @@
 {% extends "doctors/master.html" %} {% block title %} Doctors dashboard {%
-endblock %} {% block content %} {{doctor_profile.name}}{% endblock %}
+endblock %} {% block content %} {{doctor_profile.name}}
+<h1 class="primary-heading">Appointments List</h1>
+{% for appointment in appointments %}
+<div>
+  <h3>{{ appointment.title }}</h3>
+  <h2>{{ appointment.doctor }}</h2>
+  <p>{{ appointment.date }}</p>
+  <p>{{ appointment.time}}</p>
+  <p>{{ appointment.reason}}</p>
+  <p>{{appointment.status}}</p>
+
+  {% if appointment.status == "pending" %}
+  <div>
+    <a href="{% url 'approve_appointment' appointment.pk %}"
+      ><button type="button">Approve</button></a
+    >
+  </div>
+  <div>
+    <a href="{% url 'cancel_appointment' appointment.pk %}"
+      ><button type="button">Cancel</button></a
+    >
+  </div>
+
+  {% endif %} {% endfor %} {% endblock %}
+</div>
