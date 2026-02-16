@@ -24,3 +24,7 @@ class Appointment(models.Model):
 
    def __str__(self):
       return f"Doctor: {self.doctor.name} Patient: {self.patient.name} Date: {self.date} Time:{self.time}"
+   
+   def double_appointment_check(self):
+      if Appointment.objects.filter(doctor=self.doctor, date=self.date, time=self.time).exclude(id=self.id).exclude(status="cancelled").exists():
+         raise ValidationError("You already have an appointment at this time.")

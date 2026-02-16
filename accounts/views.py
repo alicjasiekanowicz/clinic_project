@@ -28,7 +28,7 @@ def login_view(request):
             messages.success(request, "You succesfuly loged in")
             return redirect("doctors_list") 
         else:
-            messages.errors(request,"Wrong name or password")
+            messages.error(request,"Wrong name or password")
     return render(request, "accounts/login.html")
 
         

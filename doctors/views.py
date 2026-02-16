@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Doctor
 from .forms import DoctorForm #UserRegistrationForm
-from accounts.forms import RegisterForm
+from accounts.forms import RegisterForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 
 
 # Create your views here.
@@ -41,22 +42,23 @@ def doctor_detail(request,pk):
 @login_required
 def doctor_modify(request,pk):
     doctor= get_object_or_404(Doctor, pk=pk)
+    isDoctor = False
+    if hasattr(request.user, 'doctor_profile'):
+        isDoctor = True 
+    else:
+        raise PermissionDenied("You do not have permission to edit this profile.")
     if request.method == "POST":
         doctor_form = DoctorForm(request.POST,instance=doctor)
-        user_form = RegisterForm(request.POST,instance=request.user)
-        if doctor_form.is_valid() and user_form.is_valid() :
+        user_form = UserUpdateForm(request.POST, instance=doctor.user)
+        if doctor_form.is_valid() and user_form.is_valid():
             doctor_form.save()
             user_form.save()
-            '''user = user_form.save()
-            doctor_profile = doctor_form.save(commit=False)
-            doctor_profile.user = user
-            doctor_profile.save()'''
             print(doctor_form.is_valid())
             print(user_form.is_valid())
             return redirect("doctors_dashboard")   
     else:
         doctor_form = DoctorForm(instance=doctor)
-        user_form = RegisterForm(instance=doctor.user) 
+        user_form = UserUpdateForm(instance=doctor.user) 
 
     return render(request,"doctors/doctor_form.html",{'user_form': user_form,'doctor_form': doctor_form})
 @login_required

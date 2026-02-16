@@ -24,6 +24,7 @@ def appointment_form(request):
                 appointment.patient = request.user.patient_profile
                 isPatient = True
                 print(request.user.patient_profile) 
+                appointment.double_appointment_check()
                 appointment.save()
                 return redirect("appointments_list") 
             if hasattr(request.user, 'doctor_profile'):

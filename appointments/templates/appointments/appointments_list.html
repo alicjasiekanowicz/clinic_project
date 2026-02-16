@@ -19,7 +19,7 @@
     <p>{{ appointment.reason}}</p>
     <p>{{appointment.status}}</p>
 
-    {% if appointment.status == "pending" %}
+    {% if appointment.status == "pending" and isDoctor %}
     <div>
       <a href="{% url 'approve_appointment' appointment.pk %}"
         ><button type="button">Approve</button></a
@@ -31,10 +31,6 @@
       >
     </div>
 
-    {% endif %} {% if isPatient %}
-    <a href="{% url 'appointment_delete' appointment.pk %}">
-      <button>Delete</button>
-    </a>
     {% endif %} {% endfor %}
   </div>
 </section>
