@@ -1,6 +1,8 @@
 from django.db import models
 from doctors.models import Doctor
 from patients.models import Patient
+from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 
 class Appointment(models.Model):
@@ -28,3 +30,8 @@ class Appointment(models.Model):
    def double_appointment_check(self):
       if Appointment.objects.filter(doctor=self.doctor, date=self.date, time=self.time).exclude(id=self.id).exclude(status="cancelled").exists():
          raise ValidationError("You already have an appointment at this time.")
+      today = timezone.now().date()
+      if self.date < today:
+         raise ValidationError("You can't have an appointment at this date")
+
+      
